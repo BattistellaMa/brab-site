@@ -1,0 +1,19 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+O projeto é feito em vite+react e javascriptx. Deve seguir uma estrutura de pastas padrão desse tipo de aplicação, onde dentro da pasta src teremos a pasta components (onde haverá botões, inputs, etc, que serão exportados para onde devem estar), pages (as páginas como home, login, financeiro etc), routes, entre outras que adicionaremos depois.
+
+CSS centralizado em `src/styles/`
+- Todo arquivo CSS deve residir em `src/styles/`.
+- Páginas: importe com `import '../styles/NomeDaPagina.css'`.
+- Componentes: importe com `import '../styles/NomeDoComponente.css'` (ajuste relativo conforme local).
+- Usar a biblioteca do Material UI para uma boa personalização centralizada
+
+Convenções de importação e composição
+- Reutilize os componentes internos em vez de variantes locais.
+- Importar CSS sempre de `src/styles/`.
+
+Checklist ao criar/alterar páginas
+1. Criar `src/pages/Nome.jsx` e `src/styles/Nome.css`.

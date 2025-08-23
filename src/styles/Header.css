@@ -1,0 +1,43 @@
+/* Estilos para o componente Header */
+
+/* Variáveis CSS para cores e espaçamentos */
+:root {
+  --header-bg-color: #424242;
+  --header-border-color: #1976d2;
+  --header-text-color: #ffffff;
+  --header-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos base do header */
+.header-container {
+  width: 100%;
+}
+
+/* Estilos para os links de navegação */
+.nav-link {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 600px) {
+  .header-container {
+    padding: 0 8px;
+  }
+}
+
+/* Animações e transições */
+.header-container * {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effects para elementos interativos futuros */
+.header-container button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+

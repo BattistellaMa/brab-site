@@ -1,0 +1,129 @@
+/* Estilos para a página Home */
+
+/* Variáveis CSS para cores e espaçamentos */
+:root {
+  --home-primary-color: #1976d2;
+  --home-bg-color: #f8f9fa;
+  --home-text-color: #333333;
+  --home-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --home-border-radius: 12px;
+}
+
+/* Container principal da página */
+.home-container {
+  min-height: calc(100vh - 64px);
+  padding: 2rem 1rem;
+  background-color: var(--home-bg-color);
+}
+
+/* Conteúdo principal */
+.home-content {
+  max-width: 100%;
+}
+
+/* Seção do título */
+.title-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+/* Seção do conteúdo */
+.content-section {
+  background: #ffffff;
+  border-radius: var(--home-border-radius);
+  padding: 2rem;
+  box-shadow: var(--home-shadow);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Campo de texto */
+.content-textarea {
+  width: 100%;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 960px) {
+  .home-container {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .title-section {
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+  }
+  
+  .content-section {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-container {
+    padding: 1rem 0.25rem;
+  }
+  
+  .title-section {
+    margin-bottom: 1.5rem;
+    padding: 0 0.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .content-section {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 0.75rem 0;
+  }
+  
+  .title-section {
+    margin-bottom: 1rem;
+  }
+  
+  .content-section {
+    padding: 0.75rem;
+    margin: 0 0.25rem;
+  }
+}
+
+/* Animações e transições */
+.home-container * {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Efeitos hover para elementos interativos */
+.content-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Foco no campo de texto */
+.content-textarea:focus-within {
+  transform: scale(1.01);
+}
+
+/* Estilos para scrollbar personalizada */
+.content-textarea ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content-textarea ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.content-textarea ::-webkit-scrollbar-thumb {
+  background: var(--home-primary-color);
+  border-radius: 4px;
+}
+
+.content-textarea ::-webkit-scrollbar-thumb:hover {
+  background: #1565c0;
+}
