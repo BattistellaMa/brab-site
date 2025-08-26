@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
+import ScheduleIcon from '@mui/icons-material/Schedule';
 import '../styles/Header.css';
 
 // Componente estilizado para o AppBar com borda azul
@@ -87,10 +89,19 @@ const Header = () => {
               component={RouterLink}
               to="/"
               className="nav-link"
+              startIcon={<HomeIcon />}
             >
               Home
             </NavButton>
-            {/* Outros botões de navegação podem ser adicionados aqui */}
+            
+            <NavButton
+              component={RouterLink}
+              to="/agendamento"
+              className="nav-link"
+              startIcon={<ScheduleIcon />}
+            >
+              Agendamento
+            </NavButton>
           </Box>
         </Toolbar>
       </Container>
