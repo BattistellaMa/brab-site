@@ -14,6 +14,7 @@ CSS centralizado em `src/styles/`
 Convenções de importação e composição
 - Reutilize os componentes internos em vez de variantes locais.
 - Importar CSS sempre de `src/styles/`.
+- Priorize o estilo "mobile first", para uma boa responsividade com aparelhos eletrônicos
 
 Checklist ao criar/alterar páginas
 1. Criar `src/pages/Nome.jsx` e `src/styles/Nome.css`.

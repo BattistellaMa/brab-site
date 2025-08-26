@@ -66,8 +66,8 @@ const Home = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Container maxWidth="lg" className="home-container">
-      <Box className="home-content">
+    <Container maxWidth="lg" className="home-container" sx={{ marginTop: 2 }}>
+      <Box className="home-content" >
         {/* Seção do título */}
         <Box className="title-section">
           <VerticalBar />
@@ -78,17 +78,15 @@ const Home = () => {
 
         {/* Seção do conteúdo */}
         <Paper elevation={2} className="content-section">
-          <StyledTextField
+          <Typography 
+            variant="body1"
             fullWidth
             multiline
-            rows={isMobile ? 8 : 12}
-            variant="outlined"
-            label="Descreva aqui as informações sobre sua empresa..."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Digite aqui as informações sobre sua empresa, missão, valores, história, equipe ou qualquer outro conteúdo relevante..."
-            className="content-textarea"
-          />
+            rows={12}
+          >
+            A ABRAB é uma microempresa de São Miguel do Oeste – SC, especializada em serviços de instalações elétricas. Atuamos com compromisso, qualidade e segurança, oferecendo soluções personalizadas para residências, comércios e indústrias da região do Extremo Oeste Catarinense.
+            Nosso objetivo é garantir eficiência e tranquilidade aos clientes, prezando sempre pelo atendimento próximo, responsabilidade técnica e respeito às normas. Na ABRAB, cada projeto é realizado com seriedade e dedicação, transformando energia em confiança.
+          </Typography>
         </Paper>
       </Box>
     </Container>
