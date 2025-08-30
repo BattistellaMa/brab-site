@@ -1,0 +1,31 @@
+.admin-container {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.admin-content {
+  width: 100%;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Responsividade mobile-first */
+@media (max-width: 600px) {
+  .admin-container {
+    padding: 16px;
+    margin-top: 0;
+  }
+  
+  .admin-header {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-container {
+    padding: 12px;
+  }
+}

@@ -7,12 +7,20 @@ import {
   Container,
   useTheme,
   useMediaQuery,
-  Button
+  Button,
+  Avatar,
+  Menu,
+  MenuItem,
+  IconButton
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import ScheduleIcon from '@mui/icons-material/Schedule';
+import PersonIcon from '@mui/icons-material/Person';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useAuth } from '../contexts/AuthContext';
 import '../styles/Header.css';
 
 // Componente estilizado para o AppBar com borda azul
@@ -60,6 +68,37 @@ const NavButton = styled(Button)(({ theme }) => ({
 const Header = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
+  const { user, profile, isAuthenticated, signOut } = useAuth();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/login');
+      handleMenuClose();
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    }
+  };
+
+  const handleNavigateToProfile = () => {
+    navigate('/cliente');
+    handleMenuClose();
+  };
+
+  const handleNavigateToAdmin = () => {
+    navigate('/admin');
+    handleMenuClose();
+  };
 
   return (
     <StyledAppBar position="static" className="header-container">
@@ -77,32 +116,105 @@ const Header = () => {
             </LogoText>
           </Box>
           
-          {/* Navegação */}
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 2,
-            }}
-          >
-            <NavButton
-              component={RouterLink}
-              to="/"
-              className="nav-link"
-              startIcon={<HomeIcon />}
+          {/* Navegação - apenas se estiver logado */}
+          {isAuthenticated && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2,
+              }}
             >
-              Home
-            </NavButton>
-            
-            <NavButton
+              <NavButton
+                component={RouterLink}
+                to="/"
+                className="nav-link"
+                startIcon={<HomeIcon />}
+              >
+                Dashboard
+              </NavButton>
+              
+              <NavButton
+                component={RouterLink}
+                to="/agendamento"
+                className="nav-link"
+                startIcon={<ScheduleIcon />}
+              >
+                Agendamento
+              </NavButton>
+            </Box>
+          )}
+
+          {/* Área do usuário */}
+          {isAuthenticated ? (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <IconButton
+                onClick={handleMenuOpen}
+                sx={{ 
+                  color: '#ffffff',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  }
+                }}
+              >
+                <Avatar 
+                  sx={{ 
+                    width: 32, 
+                    height: 32, 
+                    bgcolor: '#1976d2',
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  {user?.email?.charAt(0).toUpperCase()}
+                </Avatar>
+              </IconButton>
+              
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <MenuItem onClick={handleNavigateToProfile}>
+                  <PersonIcon sx={{ mr: 1 }} />
+                  Área do Cliente
+                </MenuItem>
+                {profile?.role === 'admin' && (
+                  <MenuItem onClick={handleNavigateToAdmin}>
+                    <AdminPanelSettingsIcon sx={{ mr: 1 }} />
+                    Painel Admin
+                  </MenuItem>
+                )}
+                <MenuItem onClick={handleLogout}>
+                  <LogoutIcon sx={{ mr: 1 }} />
+                  Sair
+                </MenuItem>
+              </Menu>
+            </Box>
+          ) : (
+            <Button
               component={RouterLink}
-              to="/agendamento"
-              className="nav-link"
-              startIcon={<ScheduleIcon />}
+              to="/login"
+              variant="outlined"
+              sx={{
+                color: '#ffffff',
+                borderColor: '#ffffff',
+                '&:hover': {
+                  borderColor: '#ffffff',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                }
+              }}
             >
-              Agendamento
-            </NavButton>
-          </Box>
+              Entrar
+            </Button>
+          )}
         </Toolbar>
       </Container>
     </StyledAppBar>

@@ -1,0 +1,31 @@
+.cliente-container {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.cliente-content {
+  width: 100%;
+}
+
+.cliente-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Responsividade mobile-first */
+@media (max-width: 600px) {
+  .cliente-container {
+    padding: 16px;
+    margin-top: 0;
+  }
+  
+  .cliente-header {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cliente-container {
+    padding: 12px;
+  }
+}
