@@ -73,6 +73,23 @@ const AgendarServico = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
+  // Função para formatar o telefone
+  const formatPhoneNumber = (value) => {
+    // Remove tudo que não é número
+    const numbers = value.replace(/\D/g, '');
+    
+    // Aplica a máscara (XX) XXXXX-XXXX
+    if (numbers.length <= 2) {
+      return numbers;
+    } else if (numbers.length <= 7) {
+      return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+    } else if (numbers.length <= 11) {
+      return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`;
+    } else {
+      return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`;
+    }
+  };
+
   // Valida se todos os campos estão preenchidos
   useEffect(() => {
     const isValid = Object.values(formData).every(value => value.trim() !== '');
@@ -188,7 +205,7 @@ const AgendarServico = () => {
               fullWidth
               label="WhatsApp"
               value={formData.telefone}
-              onChange={(e) => handleInputChange('telefone', e.target.value)}
+              onChange={(e) => handleInputChange('telefone', formatPhoneNumber(e.target.value))}
               margin="normal"
               required
               variant="outlined"

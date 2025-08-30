@@ -9,7 +9,7 @@ let supabase;
 if (!supabaseUrl || !supabaseAnonKey) {
   console.error('❌ Erro: Variáveis de ambiente do Supabase não configuradas!');
   console.error('📝 Crie um arquivo .env na raiz do projeto com:');
-  console.error('VITE_SUPABASE_URL=sua_url_do_supabase_aqui');
+  console.error('VITE_SUPABASE_URL=rezdbfaksjeiiopfendl');
   console.error('VITE_SUPABASE_ANON_KEY=sua_chave_anonima_do_supabase_aqui');
   console.error('🔗 Acesse: https://supabase.com para criar um projeto');
   
