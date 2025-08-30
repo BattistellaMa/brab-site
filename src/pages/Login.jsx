@@ -93,7 +93,7 @@ const Login = () => {
       <Box className="login-content">
         <Paper elevation={3} className="login-paper" sx={{ padding: 4 }}>
           <TitleText variant="h1" component="h1">
-            Bem-vindo à ABRAB
+            Bem-vindo à BRAB
           </TitleText>
           
           <Typography 

@@ -84,7 +84,7 @@ const Home = () => {
             multiline
             rows={12}
           >
-            A ABRAB é uma microempresa de São Miguel do Oeste – SC, especializada em serviços de instalações elétricas. Atuamos com compromisso, qualidade e segurança, oferecendo soluções personalizadas para residências, comércios e indústrias da região do Extremo Oeste Catarinense.
+            A BRAB é uma microempresa de São Miguel do Oeste – SC, especializada em serviços de instalações elétricas. Atuamos com compromisso, qualidade e segurança, oferecendo soluções personalizadas para residências, comércios e indústrias da região do Extremo Oeste Catarinense.
             Nosso objetivo é garantir eficiência e tranquilidade aos clientes, prezando sempre pelo atendimento próximo, responsabilidade técnica e respeito às normas. Na ABRAB, cada projeto é realizado com seriedade e dedicação, transformando energia em confiança.
           </Typography>
         </Paper>
