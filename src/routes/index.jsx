@@ -9,7 +9,7 @@ import Cliente from '../pages/Cliente';
 import Admin from '../pages/Admin';
 import AcessoNegado from '../pages/AcessoNegado';
 import ProtectedRoute from '../components/ProtectedRoute';
-
+import GerenciarAgendamentos from '../pages/GerenciarAgendamentos';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -35,6 +35,13 @@ const AppRoutes = () => {
           <Admin />
         </ProtectedRoute>
       } />
+
+      <Route path="/gerenciar-agendamentos" element={
+        <ProtectedRoute allowedRoles={['admin']}>
+          <GerenciarAgendamentos />
+        </ProtectedRoute>
+      } />
+
       
       {/* Rotas existentes - agora protegidas */}
       <Route path="/agendamento" element={

@@ -15,8 +15,6 @@ import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PeopleIcon from '@mui/icons-material/People';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import SettingsIcon from '@mui/icons-material/Settings';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
 import '../styles/Admin.css';
 
 // Componente estilizado para o título
@@ -59,7 +57,7 @@ const Admin = () => {
   };
 
   const handleNavigateToSchedules = () => {
-    navigate('/admin/agendamentos');
+    navigate('/gerenciar-agendamentos');
   };
 
   const handleNavigateToSettings = () => {
@@ -157,55 +155,8 @@ const Admin = () => {
             </StyledCard>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
-            <StyledCard>
-              <CardContent sx={{ flexGrow: 1, textAlign: 'center', padding: 3 }}>
-                <AnalyticsIcon sx={{ fontSize: 60, color: '#1976d2', marginBottom: 2 }} />
-                <Typography variant="h5" component="h2" gutterBottom>
-                  Relatórios
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Visualize relatórios de serviços, faturamento e estatísticas do negócio.
-                </Typography>
-              </CardContent>
-              <Box sx={{ padding: 3, paddingTop: 0 }}>
-                <Button 
-                  size="large" 
-                  variant="contained" 
-                  onClick={handleNavigateToAnalytics}
-                  fullWidth
-                  sx={{ borderRadius: '8px' }}
-                >
-                  Visualizar
-                </Button>
-              </Box>
-            </StyledCard>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <StyledCard>
-              <CardContent sx={{ flexGrow: 1, textAlign: 'center', padding: 3 }}>
-                <SettingsIcon sx={{ fontSize: 60, color: '#1976d2', marginBottom: 2 }} />
-                <Typography variant="h5" component="h2" gutterBottom>
-                  Configurações
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Configure horários de funcionamento, serviços disponíveis e outras opções.
-                </Typography>
-              </CardContent>
-              <Box sx={{ padding: 3, paddingTop: 0 }}>
-                <Button 
-                  size="large" 
-                  variant="contained" 
-                  onClick={handleNavigateToSettings}
-                  fullWidth
-                  sx={{ borderRadius: '8px' }}
-                >
-                  Configurar
-                </Button>
-              </Box>
-            </StyledCard>
-          </Grid>
+          
+          
         </Grid>
       </Box>
     </Container>
