@@ -78,7 +78,7 @@ const Dashboard = () => {
         {/* Header com informações do usuário */}
         <Box className="dashboard-header" sx={{ marginBottom: 4 }}>
           <TitleText variant="h1" component="h1">
-            Bem-vindo à ABRAB
+            ABRAB
           </TitleText>
           
           <Typography 

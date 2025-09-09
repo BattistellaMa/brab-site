@@ -112,7 +112,7 @@ const Header = () => {
             }}
           >
             <LogoText variant="h6" component="div">
-              Gestão BRAB
+              BRAB
             </LogoText>
           </Box>
           

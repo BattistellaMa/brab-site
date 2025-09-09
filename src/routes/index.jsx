@@ -19,9 +19,9 @@ const AppRoutes = () => {
       
       {/* Rotas protegidas */}
       <Route path="/" element={
-        <ProtectedRoute allowedRoles={['client', 'admin']}>
-          <Dashboard />
-        </ProtectedRoute>
+        
+          <Home />
+        
       } />
       
       <Route path="/cliente" element={

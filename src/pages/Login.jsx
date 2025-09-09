@@ -59,11 +59,11 @@ const Login = () => {
   const { isAuthenticated } = useAuth();
 
   // Redirecionar se já estiver logado
-  useEffect(() => {
+ /* useEffect(() => {
     if (isAuthenticated) {
       navigate('/');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate]);*/
 
   const handleGoogleLogin = async () => {
     try {
@@ -93,20 +93,9 @@ const Login = () => {
       <Box className="login-content">
         <Paper elevation={3} className="login-paper" sx={{ padding: 4 }}>
           <TitleText variant="h1" component="h1">
-            Bem-vindo à BRAB
+            BRAB
           </TitleText>
           
-          <Typography 
-            variant="body1" 
-            align="center" 
-            sx={{ 
-              marginBottom: 4, 
-              color: '#666666',
-              fontSize: '1.1rem'
-            }}
-          >
-            Faça login para acessar sua área personalizada
-          </Typography>
 
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <GoogleButton
