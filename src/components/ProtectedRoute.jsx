@@ -10,18 +10,21 @@ const ProtectedRoute = ({ allowedRoles, children }) => {
   React.useEffect(() => {
     if (!loading) {
       if (!isAuthenticated) {
-        navigate('/login');
+        navigate('/login', { replace: true });
         return;
       }
 
-      if (profile && !allowedRoles.includes(profile.role)) {
-        navigate('/acesso-negado');
+            if (profile === undefined || profile === null) return;
+
+
+      if (!allowedRoles.includes(profile.role)) {
+        navigate('/acesso-negado', { replace: true });
         return;
       }
     }
   }, [loading, isAuthenticated, profile, allowedRoles, navigate]);
 
-  if (loading) {
+  if (loading || profile === undefined) {
     return (
       <Box 
         sx={{ 
