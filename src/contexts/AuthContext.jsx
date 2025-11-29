@@ -20,6 +20,25 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Processar callback OAuth se houver hash na URL
     const handleAuthCallback = async () => {
+      // Verificar se há hash na URL (callback OAuth)
+      if (window.location.hash && window.location.hash.includes('access_token')) {
+        console.log('Processando callback OAuth...');
+        
+        // O Supabase processará automaticamente o hash
+        // Mas vamos limpar a URL após processar
+        try {
+          // Aguardar um pouco para o Supabase processar
+          await new Promise(resolve => setTimeout(resolve, 100));
+          
+          // Limpar hash da URL mantendo o pathname
+          const cleanUrl = window.location.origin + window.location.pathname;
+          window.history.replaceState(null, '', cleanUrl);
+        } catch (error) {
+          console.error('Erro ao processar callback:', error);
+        }
+      }
+      
+      // Verificar erros no hash
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
       const error = hashParams.get('error');
       const errorDescription = hashParams.get('error_description');
@@ -27,7 +46,8 @@ export const AuthProvider = ({ children }) => {
       if (error) {
         console.error('Erro no callback OAuth:', error, errorDescription);
         // Limpar hash da URL
-        window.history.replaceState(null, '', window.location.pathname);
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState(null, '', cleanUrl);
         setLoading(false);
         return;
       }
