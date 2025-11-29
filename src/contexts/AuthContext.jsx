@@ -68,11 +68,14 @@ export const AuthProvider = ({ children }) => {
         return;
       }
       
+      console.log('AuthContext - Sessão atual:', session ? 'Sessão encontrada' : 'Sem sessão');
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
+        console.log('AuthContext - Usuário autenticado:', session.user.email);
         fetchProfile(session.user.id);
       } else {
+        console.log('AuthContext - Nenhum usuário autenticado');
         setLoading(false);
       }
     });
@@ -104,6 +107,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchProfile = async (userId) => {
     try {
+      console.log('AuthContext - Buscando perfil para userId:', userId);
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
@@ -131,6 +135,7 @@ export const AuthProvider = ({ children }) => {
           }
         }
       } else if (data) {
+        console.log('AuthContext - Perfil carregado:', data);
         setProfile(data);
         setLoading(false);
       }
