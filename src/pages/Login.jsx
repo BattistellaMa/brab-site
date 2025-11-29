@@ -67,19 +67,27 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     try {
+      // Obter a URL base correta (funciona tanto em localhost quanto em GitHub Pages)
+      const redirectUrl = window.location.origin + window.location.pathname.replace(/\/$/, '') + '/';
+      
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/`
+          redirectTo: redirectUrl,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          }
         }
       });
       
       if (error) {
         console.error('Erro ao fazer login:', error.message);
-        // Aqui você pode adicionar um toast ou notificação de erro
+        alert(`Erro ao fazer login: ${error.message}`);
       }
     } catch (error) {
       console.error('Erro inesperado:', error);
+      alert(`Erro inesperado ao fazer login: ${error.message || error}`);
     }
   };
 
