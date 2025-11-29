@@ -25,14 +25,19 @@ export const AuthProvider = ({ children }) => {
         console.log('Processando callback OAuth...');
         
         // O Supabase processará automaticamente o hash
-        // Mas vamos limpar a URL após processar
+        // Aguardar um pouco para o Supabase processar
         try {
-          // Aguardar um pouco para o Supabase processar
-          await new Promise(resolve => setTimeout(resolve, 100));
+          await new Promise(resolve => setTimeout(resolve, 500));
           
-          // Limpar hash da URL mantendo o pathname
-          const cleanUrl = window.location.origin + window.location.pathname;
-          window.history.replaceState(null, '', cleanUrl);
+          // Verificar se a sessão foi criada
+          const { data: { session } } = await supabase.auth.getSession();
+          
+          if (session) {
+            console.log('Login bem-sucedido!');
+            // Limpar hash da URL mantendo o pathname
+            const cleanUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState(null, '', cleanUrl);
+          }
         } catch (error) {
           console.error('Erro ao processar callback:', error);
         }
@@ -81,7 +86,12 @@ export const AuthProvider = ({ children }) => {
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          await fetchProfile(session.user.id);
+          // Se for um evento de login (SIGNED_IN), processar perfil
+          if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+            await fetchProfile(session.user.id);
+          } else {
+            await fetchProfile(session.user.id);
+          }
         } else {
           setProfile(null);
           setLoading(false);

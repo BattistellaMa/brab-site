@@ -56,14 +56,30 @@ const Login = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, profile, loading } = useAuth();
 
   // Redirecionar se já estiver logado
- /* useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/');
+  useEffect(() => {
+    if (!loading && isAuthenticated) {
+      // Se o perfil ainda não foi carregado, aguardar um pouco
+      if (!profile) {
+        // Aguardar até o perfil ser carregado (máximo 3 segundos)
+        const timeout = setTimeout(() => {
+          // Se ainda não tiver perfil após 3 segundos, redirecionar para Home
+          navigate('/', { replace: true });
+        }, 3000);
+        
+        return () => clearTimeout(timeout);
+      }
+      
+      // Redirecionar baseado no papel do usuário
+      if (profile.role === 'admin') {
+        navigate('/admin', { replace: true });
+      } else {
+        navigate('/cliente', { replace: true });
+      }
     }
-  }, [isAuthenticated, navigate]);*/
+  }, [isAuthenticated, profile, loading, navigate]);
 
   const handleGoogleLogin = async () => {
     try {
@@ -91,9 +107,17 @@ const Login = () => {
     }
   };
 
-  // Se já estiver logado, não mostrar nada (será redirecionado)
-  if (isAuthenticated) {
-    return null;
+  // Se já estiver logado, mostrar loading enquanto redireciona
+  if (isAuthenticated || loading) {
+    return (
+      <Container maxWidth="sm" className="login-container" sx={{ marginTop: 4 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+          <Typography variant="h6" color="text.secondary">
+            Redirecionando...
+          </Typography>
+        </Box>
+      </Container>
+    );
   }
 
   return (
