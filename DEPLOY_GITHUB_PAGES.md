@@ -10,7 +10,57 @@ As seguintes correções foram aplicadas para resolver o erro 404 no GitHub Page
 
 ## 📋 Passo a Passo para Deploy
 
-### 1. Verificar Configurações
+### Método 1: GitHub Actions (Recomendado) ⭐
+
+Este método usa GitHub Actions para fazer o build e deploy automaticamente com as variáveis de ambiente.
+
+#### 1. Configurar Secrets no GitHub
+
+1. Acesse seu repositório no GitHub
+2. Vá em **Settings** > **Secrets and variables** > **Actions**
+3. Clique em **New repository secret** e adicione:
+
+   **Secret 1:**
+   - **Name**: `VITE_SUPABASE_URL`
+   - **Secret**: Sua URL do Supabase (ex: `https://xxxxx.supabase.co`)
+   
+   **Secret 2:**
+   - **Name**: `VITE_SUPABASE_ANON_KEY`
+   - **Secret**: Sua chave anônima do Supabase
+
+#### 2. Habilitar GitHub Pages
+
+1. Acesse **Settings** > **Pages**
+2. Em **Source**, selecione:
+   - **Source**: `GitHub Actions`
+3. Clique em **Save**
+
+#### 3. Fazer Push
+
+```bash
+git add .
+git commit -m "Configurar GitHub Actions para deploy"
+git push origin main
+```
+
+O GitHub Actions irá:
+- ✅ Fazer build automaticamente
+- ✅ Injetar as variáveis de ambiente
+- ✅ Fazer deploy para GitHub Pages
+
+#### 4. Verificar Deploy
+
+1. Acesse a aba **Actions** no GitHub
+2. Veja o workflow em execução
+3. Quando completar, o site estará disponível
+
+---
+
+### Método 2: Deploy Manual (Alternativa)
+
+Se preferir fazer o deploy manualmente:
+
+#### 1. Verificar Configurações
 
 Certifique-se de que os seguintes arquivos estão configurados corretamente:
 
@@ -19,19 +69,16 @@ Certifique-se de que os seguintes arquivos estão configurados corretamente:
 - ✅ `src/App.jsx` - BrowserRouter com basename
 - ✅ `public/404.html` - Arquivo de redirecionamento
 
-### 2. Configurar Supabase
+#### 2. Configurar Variáveis de Ambiente
 
-No painel do Supabase:
+Crie um arquivo `.env` na raiz do projeto:
 
-1. **Authentication > URL Configuration**
-   - **Site URL**: `https://BattistellaMa.github.io/brab-site/`
-   - **Redirect URLs**: Adicione:
-     - `https://BattistellaMa.github.io/brab-site/`
-     - `http://localhost:5173/` (para desenvolvimento)
+```env
+VITE_SUPABASE_URL=sua_url_do_supabase
+VITE_SUPABASE_ANON_KEY=sua_chave_anonima
+```
 
-2. **Verificar se o projeto está ativo** (não pausado)
-
-### 3. Fazer o Build
+#### 3. Fazer o Build
 
 ```bash
 # Instalar dependências (se ainda não fez)
@@ -44,7 +91,7 @@ npm run build
 ls dist/404.html
 ```
 
-### 4. Fazer o Deploy
+#### 4. Fazer o Deploy
 
 ```bash
 # Deploy para GitHub Pages
@@ -55,7 +102,7 @@ Este comando vai:
 - Executar `predeploy` (faz o build)
 - Publicar a pasta `dist/` na branch `gh-pages`
 
-### 5. Configurar GitHub Pages (se ainda não fez)
+#### 5. Configurar GitHub Pages
 
 1. Acesse o repositório no GitHub
 2. Vá em **Settings > Pages**
@@ -64,7 +111,21 @@ Este comando vai:
    - **Folder**: `/ (root)`
 4. Clique em **Save**
 
-### 6. Aguardar e Testar
+---
+
+### 3. Configurar Supabase
+
+No painel do Supabase:
+
+1. **Authentication > URL Configuration**
+   - **Site URL**: `https://BattistellaMa.github.io/brab-site/`
+   - **Redirect URLs**: Adicione:
+     - `https://BattistellaMa.github.io/brab-site/`
+     - `http://localhost:5173/` (para desenvolvimento)
+
+2. **Verificar se o projeto está ativo** (não pausado)
+
+### 4. Aguardar e Testar
 
 - Aguarde 1-2 minutos para o GitHub processar
 - Acesse: `https://BattistellaMa.github.io/brab-site/`
@@ -73,7 +134,18 @@ Este comando vai:
 
 ## 🔄 Atualizações Futuras
 
-Para atualizar o site após fazer mudanças:
+### Com GitHub Actions (Automático)
+
+```bash
+# 1. Fazer commit das alterações
+git add .
+git commit -m "Descrição das alterações"
+git push origin main
+
+# O GitHub Actions fará o deploy automaticamente!
+```
+
+### Deploy Manual
 
 ```bash
 # 1. Fazer commit das alterações
