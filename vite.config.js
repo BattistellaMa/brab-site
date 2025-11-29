@@ -1,9 +1,15 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   base: '/brab-site/',
-  plugins: [react()]
-   
+  plugins: [react()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: './index.html',
+        '404': './public/404.html'
+      }
+    }
+  }
 })
